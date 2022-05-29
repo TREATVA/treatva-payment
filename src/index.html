@@ -7,21 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
   <style>
     /* Bootstrap styles*/
+    body{
+      background-image: url("/assets/Asset_Floor.png")
+    }
 
     .panel {
       width: 70%;
       margin: 2em auto;
     }
-
-
     .panel-body {
       width: 90%;
       margin: 2em auto;
     }
-
-
     .helper-text {
       color: #e93143;
       font-size: 12px;
@@ -29,7 +29,6 @@
       height: 12px;
       display: block;
     }
-
     .helper-text-green {
       color: green;
     }
@@ -52,6 +51,12 @@
   </style>
 </head>
 <body>
+  <div style="background-image: url('/assets/Logo_Treat_Color.png');background-size: 100%;
+    background-repeat: no-repeat;
+    width: 65px;
+    height: 72px;
+    margin-left: 2%;
+    margin-top: 3%;"></div>
   <app-root></app-root>
   <!--BlueSnap Hosted Payment Fields JavaScript file-->
   <script type="text/javascript" src="https://sandbox.bluesnap.com/web-sdk/4/bluesnap.js"></script>
@@ -81,6 +86,9 @@
     var plan_id = urlParams.get('plan_id');
     var uid = urlParams.get('uid');
     var email = urlParams.get('email');
+    var plan =urlParams.get('plan');
+    var animal_ids = urlParams.get('animal_ids') != null ? urlParams.get('animal_ids').split(",").map(n => {return Number(n)}) : null;
+    console.log(animal_ids);
 
     /* Defining bsObj: object that stores Hosted Payment Fields
     event handlers, styling, placeholder text, etc. */
@@ -146,13 +154,20 @@
     /* Calling bluesnap.submitCredentials: function that submits card data to
     BlueSnap and calls input function with card data object if submission was successful */
     function do_when_clicking_submit_button() {
+      $('#error-body').hide();
+      $('#loading-body').show();
+      var loadingDiv = document.getElementById('loading');
+      loadingDiv.style.visibility = 'visible';
       bluesnap.hostedPaymentFieldsSubmitData(
         function(callback) {
           if (null != callback.error) {
             var errorArray = callback.error;
+            $('#error-body').show();
             for (i in errorArray) {
-              $("#" + errorArray[i].tagId + "-help").text(errorArray[i].errorCode + " - " + errorArray[i].errorDescription);
+              $('#error-content').text(errorArray[i].errorCode + " - " + errorArray[i].errorDescription);
             }
+            loadingDiv.style.visibility = 'hidden';
+            $('#loading-body').hide();
           } else {
             var cardData = callback.cardData;
             console.log(
@@ -176,23 +191,30 @@
             data.token = btoken;
             data.userId = uid;
             data.planId = plan_id;
+            data.plan = plan;
+            data.animalIds = animal_ids;
+
 
             $.ajax({
               type: "POST",
               beforeSend: function(xhr){xhr.setRequestHeader('uid', uid);},
-              url: "http://localhost:8080/rest/payments/subscribe",
+              url: "https://treattestenvironment.uc.r.appspot.com/rest/payments/subscribe",
               data: JSON.stringify(data),// now data come in this function
               contentType: "application/json; charset=utf-8",
               crossDomain: true,
               dataType: "json",
               success: function (data, status, jqXHR) {
-                alert("success");// write success in " "
+                $("#payment-form").hide();
+                $("#payment-success").show();
+                loadingDiv.style.visibility = 'hidden';
+                $('#loading-body').hide();
               },
 
               error: function (jqXHR, status) {
-                // error handler
-                console.log(jqXHR);
-                alert('fail' + status.code);
+                $('#error-body').show();
+                $('#error-content').text(jqXHR.responseJSON.message);
+                loadingDiv.style.visibility = 'hidden';
+                $('#loading-body').hide();
               }
             });
 
