@@ -1,3 +1,6 @@
+<div style="width: 100%; text-align: center; color: white; font-weight: bold;font-size: x-large;">
+  {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meal / Day')}}
+</div>
 <div id="payment-form" class="panel panel-default bootstrap-basic">
   <form class="panel-body" id="checkout-form" action="#">
     <div class="row">
@@ -28,10 +31,9 @@
       </div>
     </div>
     <div style="text-align: center; width: 100%">
+      <p *ngIf="gifts"><span style="font-weight: bold; font-style: italic">Gift/s:</span> {{gifts}}</p>
       <p>{{detailString}}</p>
-      <p *ngIf="gifts"><span style="font-weight: bold; font-style: italic">Gifts:</span> {{gifts}}</p>
       <p><span style="font-weight: bold">Total:</span> ${{total}}</p>
-
     </div>
     <div style="align-items: center; text-align: center">
       <input type="image" id="submit-button" onclick="do_when_clicking_submit_button()" src="../assets/button.png"
