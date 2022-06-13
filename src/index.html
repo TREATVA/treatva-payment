@@ -198,7 +198,7 @@
             $.ajax({
               type: "POST",
               beforeSend: function(xhr){xhr.setRequestHeader('uid', uid);},
-              url: "https://dogapp-67827.appspot.com/rest/payments/subscribe",
+              url: "http://localhost:8080/rest/payments/subscribe",
               data: JSON.stringify(data),// now data come in this function
               contentType: "application/json; charset=utf-8",
               crossDomain: true,
