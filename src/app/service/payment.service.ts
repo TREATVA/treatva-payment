@@ -15,6 +15,6 @@ export class PaymentService {
         uid: uid
       })
     };
-    return this.httpClient.get<Plan>(`https://treattestenvironment.uc.r.appspot.com/rest/payments/active-plan/${planId}`, httpOptions);
+    return this.httpClient.get<Plan>(`https://dogapp-67827.appspot.com/rest/payments/active-plan/${planId}`, httpOptions);
   }
 }
