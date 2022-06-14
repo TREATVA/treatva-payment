@@ -1,5 +1,5 @@
 <div style="width: 100%; text-align: center; color: white; font-weight: bold;font-size: x-large;">
-  {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meal / Day')}}
+  {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meals / Day')}}
 </div>
 <div id="payment-form" class="panel panel-default bootstrap-basic">
   <form class="panel-body" id="checkout-form" action="#">
@@ -40,13 +40,13 @@
 
 </div>
 <div id="payment-success" class="successScreen" style="display: none">
-<div class="card">
-  <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-    <i class="success-checkmark">✓</i>
+  <div class="card">
+    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+      <i class="success-checkmark">✓</i>
+    </div>
+    <h1 class="successH1">Success</h1>
+    <p class="successContent">The payment request is completed<br/> Thanks for your Treatment! </p>
   </div>
-  <h1 class="successH1">Success</h1>
-  <p class="successContent">The payment request is completed<br/> Thanks for your Treatment! </p>
-</div>
 </div>
 
 <div id="loading-body" class="loading-container" style="display: none">

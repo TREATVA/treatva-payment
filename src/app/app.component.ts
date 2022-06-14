@@ -47,15 +47,15 @@ export class AppComponent implements OnInit{
           if(this.plan == 'FREE_DELIVERY'){
             this.detailString = "Free delivery X 13 weeks"
             this.total = 1.49 * 13;
-            this.gifts = '5 meals';
+            this.gifts = (animalCount * 5) + ' meals';
           } else if(this.plan == 'MEAL_1'){
             this.detailString = "1 meal day X 13 weeks X " + animalCount + " animal/s"
             this.total = 13 * 2.79 * animalCount;
-            this.gifts = '5 meals';
+            this.gifts = (animalCount * 5) + ' meals';
           } else {
             this.detailString = "3 meal day X 13 weeks X " + animalCount + " animal/s"
             this.total = 4.99 * 13 * animalCount;
-            this.gifts = '10 meals';
+            this.gifts = (animalCount * 10) + ' meals';
           }
         } else if(ev6monthId != null && ev6monthId == this.plan_id) {
           this.period = 'Every 26 weeks';
@@ -66,26 +66,26 @@ export class AppComponent implements OnInit{
           } else if(this.plan == 'MEAL_1'){
             this.detailString = "$2.79 per week X 26 weeks X " + animalCount + " animal/s"
             this.total = 2.79 * 26 * animalCount;
-            this.gifts = '10 meals';
+            this.gifts = (10* animalCount) + ' meals';
           } else {
             this.detailString = "$4.99 per week X 26 weeks X " + animalCount + " animal/s"
             this.total = 4.99 * 26 * animalCount;
-            this.gifts = 'Toy';
+            this.gifts = animalCount + ' Toy/s';
           }
         } else if(annuallyId != null && annuallyId == this.plan_id) {
           this.period = 'Yearly';
           if(this.plan == 'FREE_DELIVERY'){
             this.detailString = "$1.49 per week X 52 weeks"
             this.total = 1.49 * 12;
-            this.gifts = 'Toy'
+            this.gifts = animalCount + ' Toy/s'
           } else if(this.plan == 'MEAL_1'){
             this.detailString = "$2.79 per week X 52 weeks X " + animalCount + " animal/s"
             this.total = 2.79 * 52 * animalCount;
-            this.gifts = 'Toy + 5 meals';
+            this.gifts = animalCount + ' Toy/s + ' + animalCount * 5 + ' meals ';
           } else {
             this.detailString = "$4.99 per week X 52 weeks X " + animalCount + " animal/s"
             this.total = 4.99 * 52 * animalCount;
-            this.gifts = 'Toy + 10 meals ';
+            this.gifts = animalCount + ' Toy/s + ' + animalCount * 10 + ' meals ';
           }
         }
 
