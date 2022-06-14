@@ -59,7 +59,7 @@
     margin-top: 3%;"></div>
   <app-root></app-root>
   <!--BlueSnap Hosted Payment Fields JavaScript file-->
-  <script type="text/javascript" src="https://sandbox.bluesnap.com/web-sdk/4/bluesnap.js"></script>
+  <script type="text/javascript" src="https://ws.bluesnap.com/web-sdk/4/bluesnap.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     /* Defining helper functions/objects */
@@ -198,7 +198,7 @@
             $.ajax({
               type: "POST",
               beforeSend: function(xhr){xhr.setRequestHeader('uid', uid);},
-              url: "http://localhost:8080/rest/payments/subscribe",
+              url: "https://dogapp-67827.appspot.com/rest/payments/subscribe",
               data: JSON.stringify(data),// now data come in this function
               contentType: "application/json; charset=utf-8",
               crossDomain: true,
