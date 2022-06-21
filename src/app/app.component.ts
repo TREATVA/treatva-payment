@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.paymentService.getPlan({uid: this.uid, planId: this.plan + '_' + (this.animalIds != null ? this.animalIds.split(',').length : 0)})
+    this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY' ? 'FREE_DELIVERY' : this.plan + '_' + (this.animalIds != null ? this.animalIds.split(',').length : 0)})
       .subscribe(res=>{
         let monthId = res.planPeriodsWithPlanIds['MONTHLY'];
         let quartId = res.planPeriodsWithPlanIds['QUARTERLY'];
