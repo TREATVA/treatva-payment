@@ -45,15 +45,15 @@ export class AppComponent implements OnInit{
         } else if(quartId != null && quartId == this.plan_id) {
           this.period = 'Quarterly';
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = "Free delivery X 13 weeks"
+            this.detailString = "$1.49 per week X 13 weeks"
             this.total = 1.49 * 13;
             this.gifts = (animalCount * 5) + ' meals';
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = "1 meal day X 13 weeks X " + animalCount + " animal/s"
+            this.detailString = "$2.79 per week X 13 weeks X " + animalCount + " animal/s"
             this.total = 13 * 2.79 * animalCount;
             this.gifts = (animalCount * 5) + ' meals';
           } else {
-            this.detailString = "3 meal day X 13 weeks X " + animalCount + " animal/s"
+            this.detailString = "$4.99 per week X 13 weeks X " + animalCount + " animal/s"
             this.total = 4.99 * 13 * animalCount;
             this.gifts = (animalCount * 10) + ' meals';
           }
