@@ -80,7 +80,7 @@ export class AppComponent implements OnInit{
           this.period = 'Yearly';
           if(this.plan == 'FREE_DELIVERY'){
             this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X 52 weeks"
-            this.total = 1.49 * 12;
+            this.total = 1.49 * 52;
             this.gifts = animalCount + ' Toy/s'
           } else if(this.plan == 'MEAL_1'){
             this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week")+" X 52 weeks X " + animalCount + " animal/s"
