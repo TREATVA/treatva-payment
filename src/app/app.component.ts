@@ -115,9 +115,9 @@ export class AppComponent implements OnInit{
 
   clickOnSubscribe() {
     console.log('subscribing')
-    this.analytics.logEvent('click_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     const duration =  (new Date().getTime() - this.start_time.getTime())/1000;
-    this.analytics.logEvent('spent_time_click_subscribe', { "duration": duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    this.analytics.logEvent('click_on_subscribe', {"duration_from_landing":duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+
   }
 
   validBluesnap() {
@@ -137,20 +137,18 @@ export class AppComponent implements OnInit{
 
   clickOnSubscribeSuccess() {
     console.log('subscribing')
-    this.analytics.logEvent('success_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     const duration = (new Date().getTime() - this.start_time.getTime())/1000;
-    this.analytics.logEvent('spent_time_success', { "duration": duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
-  }
+    this.analytics.logEvent('success_on_subscribe', {"duration_from_landing":duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+   }
 
   clickOnSubscribeError() {
     const errEl = document.getElementById('error-content');
+    const duration = (new Date().getTime() - this.start_time.getTime())/1000;
     if(errEl  != null) {
       const errorMessage = errEl.textContent
-      this.analytics.logEvent('error_on_subscribe', { "message":errorMessage,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+      this.analytics.logEvent('error_on_subscribe', {"duration_from_landing": duration,"message":errorMessage,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     } else {
-      this.analytics.logEvent('error_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+      this.analytics.logEvent('error_on_subscribe', { "duration_from_landing": duration,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     }
-    const duration = (new Date().getTime() - this.start_time.getTime())/1000;
-    this.analytics.logEvent('spent_time_error', { "duration": duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
   }
 }
