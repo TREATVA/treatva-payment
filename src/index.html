@@ -96,10 +96,13 @@
       token: btoken,
       onFieldEventHandler: {
         onFocus: function(tagId) {
+          console.log('Focus'+tagId)
+          $("#"+tagId+'-analytics').click()
           // Handle focus
           changeImpactedElement(tagId, "hosted-field-valid hosted-field-invalid", "hosted-field-focus");
         },
         onBlur: function(tagId) {
+          console.log('Blur'+tagId)
           // Handle blur
           changeImpactedElement(tagId, "hosted-field-focus");
         },
@@ -109,6 +112,7 @@
           $("#" + tagId + "-help").removeClass('helper-text-green').text(errorCode + " - " + errorDescription);
         },
         onType: function(tagId, cardType, cardData) {
+          console.log('Typeing'+tagId)
           // get card type from cardType and display card image
           $("#card-logo > img").attr("src", cardUrl[cardType]);
           if (null != cardData) {
@@ -154,6 +158,7 @@
     /* Calling bluesnap.submitCredentials: function that submits card data to
     BlueSnap and calls input function with card data object if submission was successful */
     function do_when_clicking_submit_button() {
+      $("#subscribe-analytics").click()
       $('#error-body').hide();
       $('#loading-body').show();
       var loadingDiv = document.getElementById('loading');
@@ -166,9 +171,11 @@
             for (i in errorArray) {
               $('#error-content').text(errorArray[i].errorCode + " - " + errorArray[i].errorDescription);
             }
+            $('#invalid-bluesnap-analytic').click()
             loadingDiv.style.visibility = 'hidden';
             $('#loading-body').hide();
           } else {
+            $('#valid-bluesnap-analytic').click()
             var cardData = callback.cardData;
             console.log(
               "Card Type: " +
@@ -204,6 +211,7 @@
               crossDomain: true,
               dataType: "json",
               success: function (data, status, jqXHR) {
+                $("#subscribe-analytics-success").click()
                 $("#payment-form").hide();
                 $("#payment-success").show();
                 loadingDiv.style.visibility = 'hidden';
@@ -213,6 +221,7 @@
               error: function (jqXHR, status) {
                 $('#error-body').show();
                 $('#error-content').text(jqXHR.responseJSON.message);
+                $("#subscribe-analytics-error").click()
                 loadingDiv.style.visibility = 'hidden';
                 $('#loading-body').hide();
               }
@@ -224,5 +233,6 @@
       );
     }
   </script>
+
 </body>
 </html>

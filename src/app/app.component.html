@@ -15,21 +15,24 @@
       <!--Hosted Field for CC number-->
       <div class="form-group col-md-12">
         <label for="card-number">Card Number</label>
+        <div id="ccn-analytics" (click)="clickOnCard()"></div>
         <div class="input-group">
           <div class="form-control" id="card-number" data-bluesnap="ccn"></div>
           <div id="card-logo" class="input-group-addon"><img src="https://files.readme.io/d1a25b4-generic-card.png" height="20px"></div>
         </div>
       </div>
       <!--Hosted Field for CC EXP-->
-      <div class="form-group col-xs-7">
+      <div class="form-group col-xs-7" >
         <label for="exp-date">Exp. Date</label>
+        <div id="exp-analytics" (click)="clickOnExpDate()"></div>
         <div class="form-control" id="exp-date" data-bluesnap="exp"></div>
         <span class="helper-text" id="exp-help"></span>
       </div>
       <!--Hosted Field for CC CVV-->
-      <div class="form-group col-xs-5">
+      <div class="form-group col-xs-5" >
         <label for="cvv">CVV</label>
-        <div class="form-control" id="cvv" data-bluesnap="cvv"></div>
+        <div id="cvv-analytics" (click)="clickOnCVV()"></div>
+        <div class="form-control" id="cvv" data-bluesnap="cvv" (click)="clickOnCVV()"></div>
         <span class="helper-text" id='cvv-help'></span>
       </div>
     </div>
@@ -38,7 +41,12 @@
       <p>{{detailString}}</p>
       <p><span style="font-weight: bold">Total:</span> ${{total}}</p>
     </div>
-    <button class="btn btn-success btn-lg col-xs-6 col-xs-offset-3" style="font-size: 3vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button" onclick="do_when_clicking_submit_button()">Subscribe</button>
+    <div id="subscribe-analytics" (click)="clickOnSubscribe()"></div>
+    <div id="valid-bluesnap-analytics" (click)="validBluesnap()"></div>
+    <div id="invalid-bluesnap-analytics" (click)="inValidBluesnap()"></div>
+    <div id="subscribe-analytics-success" (click)="clickOnSubscribeSuccess()"></div>
+    <div id="subscribe-analytics-error" (click)="clickOnSubscribeError()"></div>
+    <button class="btn btn-success btn-lg col-xs-6 col-xs-offset-3" style="font-size: 3vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">Subscribe</button>
   </form>
 
 </div>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PaymentService} from "./service/payment.service";
+import {AngularFireAnalytics} from "@angular/fire/compat/analytics";
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,16 @@ export class AppComponent implements OnInit{
   period: string | undefined;
   gifts: string | undefined;
 
+  start_time: Date = new Date();
+
   customDetails = this.price !== null && this.frequency !== null;
 
-  constructor(private paymentService: PaymentService) {
+  constructor(private paymentService: PaymentService,
+              private analytics: AngularFireAnalytics) {
   }
 
   ngOnInit() {
+    this.analytics.logEvent('payment_page_landing', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY' ? 'FREE_DELIVERY' : this.plan + '_' + (this.animalIds != null ? this.animalIds.split(',').length : 0)})
       .subscribe(res=>{
         let monthId = res.planPeriodsWithPlanIds['MONTHLY'];
@@ -94,5 +99,58 @@ export class AppComponent implements OnInit{
         }
 
       });
+  }
+
+  clickOnCard(){
+    this.analytics.logEvent('enter_card_number', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
+  clickOnCVV(){
+    this.analytics.logEvent('enter_cvv', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
+  clickOnExpDate(){
+    this.analytics.logEvent('enter_exp_date', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
+  clickOnSubscribe() {
+    console.log('subscribing')
+    this.analytics.logEvent('click_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    const duration =  (new Date().getTime() - this.start_time.getTime())/1000;
+    this.analytics.logEvent('spent_time_click_subscribe', { "duration": duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
+  validBluesnap() {
+    this.analytics.logEvent('valid_card_by_bluesnap', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
+  inValidBluesnap() {
+    const errEl = document.getElementById('error-content');
+    if(errEl  != null) {
+      const errorMessage = errEl.textContent
+      this.analytics.logEvent('error_from_bluesnap', {"message":errorMessage, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+
+    } else {
+      this.analytics.logEvent('error_from_bluesnap', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    }
+  }
+
+  clickOnSubscribeSuccess() {
+    console.log('subscribing')
+    this.analytics.logEvent('success_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    const duration = (new Date().getTime() - this.start_time.getTime())/1000;
+    this.analytics.logEvent('spent_time_success', { "duration": duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
+  clickOnSubscribeError() {
+    const errEl = document.getElementById('error-content');
+    if(errEl  != null) {
+      const errorMessage = errEl.textContent
+      this.analytics.logEvent('error_on_subscribe', { "message":errorMessage,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    } else {
+      this.analytics.logEvent('error_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    }
+    const duration = (new Date().getTime() - this.start_time.getTime())/1000;
+    this.analytics.logEvent('spent_time_error', { "duration": duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
   }
 }
