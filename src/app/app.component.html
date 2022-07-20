@@ -1,7 +1,7 @@
 <div id="error-body" class="alert alert-danger" style="display: none">
   <p id="error-content">Oops payment isn't completed</p>
 </div>
-<div style="width: 100%; text-align: center; color: white; font-weight: bold;font-size: x-large;">
+<div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
   {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meals / Day')}}
 </div>
 <div id="payment-form" class="panel panel-default bootstrap-basic">
@@ -46,7 +46,11 @@
     <div id="invalid-bluesnap-analytics" (click)="inValidBluesnap()"></div>
     <div id="subscribe-analytics-success" (click)="clickOnSubscribeSuccess()"></div>
     <div id="subscribe-analytics-error" (click)="clickOnSubscribeError()"></div>
+    <div style="text-align: center">
     <button class="btn btn-success btn-lg col-xs-6 col-xs-offset-3" style="font-size: 3vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">Subscribe</button>
+   <br/>
+      <br/>
+    <p style="font-size: xx-small">Cancel anytime</p></div>
   </form>
 
 </div>
