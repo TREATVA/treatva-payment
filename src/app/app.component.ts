@@ -39,60 +39,113 @@ export class AppComponent implements OnInit{
         let ev6monthId = res.planPeriodsWithPlanIds['EVERY_6_MONTHS'];
         let annuallyId = res.planPeriodsWithPlanIds['ANNUALLY'];
         let animalCount  = this.animalIds == null ? 0 :this.animalIds.split(',').length;
+        let multiplyPart;
         if(monthId != null && monthId == this.plan_id){
+          if(this.customDetails) {
+              if(this.frequency == 'day') {
+                multiplyPart = '31 days'
+              } else if(this.frequency == 'week') {
+                multiplyPart = '4 weeks'
+              } else if (this.frequency == 'month') {
+                multiplyPart = '1 month'
+              } else {
+                multiplyPart = '4 weeks'
+              }
+          } else {
+            multiplyPart = '4 weeks'
+          }
           this.period = 'Monthly';
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X 4 weeks"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
             this.total = 1.49 * 4;
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X 4 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 4 * 2.79 * animalCount;
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X 4 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 4 * 4.99 * animalCount;
           }
         } else if(quartId != null && quartId == this.plan_id) {
+          if(this.customDetails) {
+            if(this.frequency == 'day') {
+              multiplyPart = '93 days'
+            } else if(this.frequency == 'week') {
+              multiplyPart = '13 weeks'
+            } else if (this.frequency == 'month') {
+              multiplyPart = '3 month'
+            } else {
+              multiplyPart = '13 weeks'
+            }
+          } else {
+            multiplyPart = '13 weeks'
+          }
           this.period = 'Quarterly';
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X 13 weeks"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X " + multiplyPart + ""
             this.total = 1.49 * 13;
             this.gifts = (animalCount * 5) + ' meals';
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X 13 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 13 * 2.79 * animalCount;
             this.gifts = (animalCount * 5) + ' meals';
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X 13 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 4.99 * 13 * animalCount;
             this.gifts = (animalCount * 10) + ' meals';
           }
         } else if(ev6monthId != null && ev6monthId == this.plan_id) {
+          if(this.customDetails) {
+            if(this.frequency == 'day') {
+              multiplyPart = '183 days'
+            } else if(this.frequency == 'week') {
+              multiplyPart = '26 weeks'
+            } else if (this.frequency == 'month') {
+              multiplyPart = '6 month'
+            } else {
+              multiplyPart = '26 weeks'
+            }
+          } else {
+            multiplyPart = '26 weeks'
+          }
           this.period = 'Every 26 weeks';
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X 26 weeks"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
             this.total = 1.49 * 26;
             this.gifts = '10 meals';
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X 26 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 2.79 * 26 * animalCount;
             this.gifts = (10* animalCount) + ' meals';
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X 26 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 4.99 * 26 * animalCount;
             this.gifts = animalCount + ' Toy/s';
           }
         } else if(annuallyId != null && annuallyId == this.plan_id) {
           this.period = 'Yearly';
+          if(this.customDetails) {
+            if(this.frequency == 'day') {
+              multiplyPart = '365 days'
+            } else if(this.frequency == 'week') {
+              multiplyPart = '52 weeks'
+            } else if (this.frequency == 'month') {
+              multiplyPart = '12 month'
+            } else {
+              multiplyPart = '52 weeks'
+            }
+          } else {
+            multiplyPart = '52 weeks'
+          }
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X 52 weeks"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X " + multiplyPart + ""
             this.total = 1.49 * 52;
             this.gifts = animalCount + ' Toy/s'
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week")+" X 52 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week")+" X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 2.79 * 52 * animalCount;
             this.gifts = animalCount + ' Toy/s + ' + animalCount * 5 + ' meals ';
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X 52 weeks X " + animalCount + " animal/s"
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart + " X " + animalCount + " animal/s"
             this.total = 4.99 * 52 * animalCount;
             this.gifts = animalCount + ' Toy/s + ' + animalCount * 10 + ' meals ';
           }
