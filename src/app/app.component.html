@@ -1,3 +1,4 @@
+<div *ngIf="!version">
 <div id="error-body" class="alert alert-danger" style="display: none">
   <p id="error-content">Oops payment isn't completed</p>
 </div>
@@ -67,5 +68,74 @@
 <div id="loading-body" class="loading-container" style="display: none">
   <div id="loading" class="loading">
     <span style="margin-left: 15px;">Loading..</span>
+  </div>
+</div>
+</div>
+<div *ngIf="version">
+  <div id="error-body" class="alert alert-danger" style="display: none">
+    <p id="error-content">Oops payment isn't completed</p>
+  </div>
+  <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
+    {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meals / Day')}}
+  </div>
+  <div id="payment-form" class="panel panel-default bootstrap-basic">
+    <form class="panel-body" id="checkout-form" action="#">
+      <div class="row">
+        <!--Hosted Field for CC number-->
+        <div class="form-group col-md-12">
+          <label for="card-number">Card Number</label>
+          <div id="ccn-analytics" (click)="clickOnCard()"></div>
+          <div class="input-group">
+            <div class="form-control" id="card-number" data-bluesnap="ccn"></div>
+            <div id="card-logo" class="input-group-addon"><img src="https://files.readme.io/d1a25b4-generic-card.png" height="20px"></div>
+          </div>
+        </div>
+        <!--Hosted Field for CC EXP-->
+        <div class="form-group col-xs-7" >
+          <label for="exp-date">Exp. Date</label>
+          <div id="exp-analytics" (click)="clickOnExpDate()"></div>
+          <div class="form-control" id="exp-date" data-bluesnap="exp"></div>
+          <span class="helper-text" id="exp-help"></span>
+        </div>
+        <!--Hosted Field for CC CVV-->
+        <div class="form-group col-xs-5" >
+          <label for="cvv">CVV</label>
+          <div id="cvv-analytics" (click)="clickOnCVV()"></div>
+          <div class="form-control" id="cvv" data-bluesnap="cvv" (click)="clickOnCVV()"></div>
+          <span class="helper-text" id='cvv-help'></span>
+        </div>
+      </div>
+      <div style="text-align: center">
+        <button class="btn btn-success btn-lg col-xs-6" style="width:100%; font-size: 3vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">Subscribe</button>
+        <br/>
+        <p style="font-size: xx-small">Cancel anytime</p></div>
+      <div style="text-align: center; width: 100%">
+        <p *ngIf="gifts"><span style="font-weight: bold; font-style: italic">Gift/s:</span> {{gifts}}</p>
+        <p>{{detailString}}</p>
+        <p><span style="font-weight: bold">Total:</span> ${{total}}</p>
+      </div>
+      <div id="subscribe-analytics" (click)="clickOnSubscribe()"></div>
+      <div id="valid-bluesnap-analytics" (click)="validBluesnap()"></div>
+      <div id="invalid-bluesnap-analytics" (click)="inValidBluesnap()"></div>
+      <div id="subscribe-analytics-success" (click)="clickOnSubscribeSuccess()"></div>
+      <div id="subscribe-analytics-error" (click)="clickOnSubscribeError()"></div>
+
+    </form>
+
+  </div>
+  <div id="payment-success" class="successScreen" style="display: none">
+    <div class="card">
+      <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+        <i class="success-checkmark">✓</i>
+      </div>
+      <h1 class="successH1">Success</h1>
+      <p class="successContent">The payment request is completed<br/> Thanks for your Treatment! </p>
+    </div>
+  </div>
+
+  <div id="loading-body" class="loading-container" style="display: none">
+    <div id="loading" class="loading">
+      <span style="margin-left: 15px;">Loading..</span>
+    </div>
   </div>
 </div>

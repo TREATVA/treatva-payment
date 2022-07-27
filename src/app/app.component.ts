@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
   plan_id = new URLSearchParams(window.location.search).get('plan_id');
   frequency = new URLSearchParams(window.location.search).get('frequency');
   price = new URLSearchParams(window.location.search).get('price');
+  version = new URLSearchParams(window.location.search).get('version');
 
   detailString: string | undefined;
   total: number | undefined;
@@ -31,7 +32,9 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.analytics.logEvent('payment_page_landing', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    if (this.uid) {
+      this.analytics.logEvent('payment_page_landing', {"uid": this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    }
     this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY' ? 'FREE_DELIVERY' : this.plan + '_' + (this.animalIds != null ? this.animalIds.split(',').length : 0)})
       .subscribe(res=>{
         let monthId = res.planPeriodsWithPlanIds['MONTHLY'];
