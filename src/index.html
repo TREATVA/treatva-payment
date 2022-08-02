@@ -56,6 +56,7 @@
   <!--BlueSnap Hosted Payment Fields JavaScript file-->
   <script type="text/javascript" src="https://ws.bluesnap.com/web-sdk/4/bluesnap.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AXVSORFJEAMbjbaigM4xalpH8QswW6ayaQMXM3QD_MUV9aZuF1GSZQQk_VhbLYSXuHZkNkHXiHpu-NUk&vault=true&intent=subscription"></script>
   <script>
     /* Defining helper functions/objects */
     // changeImpactedElement: function that removes the provided class(es) and adds the provided class(es) to Hosted Payment Fields element
@@ -79,11 +80,61 @@
     var urlParams = new URLSearchParams(queryString);
     var btoken = urlParams.get('token');
     var plan_id = urlParams.get('plan_id');
+    var paypal_plan_id = urlParams.get('paypal_plan_id');
     var uid = urlParams.get('uid');
     var email = urlParams.get('email');
     var plan =urlParams.get('plan');
     var animal_ids = urlParams.get('animal_ids') != null ? urlParams.get('animal_ids').split(",").map(n => {return Number(n)}) : null;
     console.log(animal_ids);
+    paypal.Buttons({
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          'plan_id': paypal_plan_id, // Creates the subscription
+          'application_context': {
+            'shipping_preference': 'NO_SHIPPING'
+          }
+        });
+      },
+      onApprove: function(data, actions) {
+        console.log('You have successfully created subscription ' + data.subscriptionID); // Optional message given to subscriber
+        data = {}
+        data.token = btoken;
+        data.userId = uid;
+        data.planId = paypal_plan_id;
+        data.plan = plan;
+        data.animalIds = animal_ids;
+        data.paypalSubId = data.subscriptionID;
+        $.ajax({
+          type: "POST",
+          beforeSend: function(xhr){xhr.setRequestHeader('uid', uid);},
+          url: "https://dogapp-68777.uc.r.appspot.com/rest/payments/paypal/subscribe",
+          data: JSON.stringify(data),// now data come in this function
+          contentType: "application/json; charset=utf-8",
+          crossDomain: true,
+          dataType: "json",
+          success: function (data, status, jqXHR) {
+            $("#payment-form").hide();
+            $("#payment-success").show();
+            loadingDiv.style.visibility = 'hidden';
+            $('#loading-body').hide();
+          },
+          error: function (jqXHR, status) {
+            $('#error-body').show();
+            $('#error-content').text(jqXHR.responseJSON.message);
+            loadingDiv.style.visibility = 'hidden';
+            $('#loading-body').hide();
+          }
+        });
+      },
+      onError: function (err) {
+        // For example, redirect to a specific error page
+        $('#error-body').show();
+        $('#error-content').text(err);
+        loadingDiv.style.visibility = 'hidden';
+        $('#loading-body').hide();
+      }
+    }).render('#paypal-button-container');
+
 
     /* Defining bsObj: object that stores Hosted Payment Fields
     event handlers, styling, placeholder text, etc. */

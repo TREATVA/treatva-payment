@@ -52,6 +52,8 @@
    <br/>
       <br/>
     <p style="font-size: xx-small">Cancel anytime</p></div>
+    <hr style="margin-top: 25%;border-top: 1px solid #7b7474;"/>
+    <div *ngIf="paypal_plan_id" id="paypal-button-container"></div>
   </form>
 
 </div>
@@ -119,6 +121,8 @@
       <div id="invalid-bluesnap-analytics" (click)="inValidBluesnap()"></div>
       <div id="subscribe-analytics-success" (click)="clickOnSubscribeSuccess()"></div>
       <div id="subscribe-analytics-error" (click)="clickOnSubscribeError()"></div>
+      <hr style="margin-top: 25%;border-top: 1px solid #7b7474;"/>
+      <div *ngIf="paypal_plan_id" id="paypal-button-container"></div>
 
     </form>
 
