@@ -171,8 +171,8 @@ export class AppComponent implements OnInit{
 
   clickOnSubscribe() {
     console.log('subscribing')
-    const duration =  (new Date().getTime() - this.start_time.getTime())/1000;
-    this.analytics.logEvent('click_on_subscribe', {"duration_from_landing":duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    //const duration =  (new Date().getTime() - this.start_time.getTime())/1000;
+    this.analytics.logEvent('click_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
 
   }
 
@@ -193,18 +193,18 @@ export class AppComponent implements OnInit{
 
   clickOnSubscribeSuccess() {
     console.log('subscribing')
-    const duration = (new Date().getTime() - this.start_time.getTime())/1000;
-    this.analytics.logEvent('success_on_subscribe', {"duration_from_landing":duration, "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    //const duration = (new Date().getTime() - this.start_time.getTime())/1000;
+    this.analytics.logEvent('success_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
    }
 
   clickOnSubscribeError() {
     const errEl = document.getElementById('error-content');
-    const duration = (new Date().getTime() - this.start_time.getTime())/1000;
+    //const duration = (new Date().getTime() - this.start_time.getTime())/1000;
     if(errEl  != null) {
       const errorMessage = errEl.textContent
-      this.analytics.logEvent('error_on_subscribe', {"duration_from_landing": duration,"message":errorMessage,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+      this.analytics.logEvent('error_on_subscribe', {"message":errorMessage,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     } else {
-      this.analytics.logEvent('error_on_subscribe', { "duration_from_landing": duration,"uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+      this.analytics.logEvent('error_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     }
   }
 }
