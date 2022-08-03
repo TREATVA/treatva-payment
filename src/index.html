@@ -80,7 +80,7 @@
     var urlParams = new URLSearchParams(queryString);
     var btoken = urlParams.get('token');
     var plan_id = urlParams.get('plan_id');
-    var paypal_plan_id = undefined;
+    var paypal_plan_id = urlParams.get('paypal_plan_id');
     var uid = urlParams.get('uid');
     var email = urlParams.get('email');
     var plan =urlParams.get('plan');
@@ -98,20 +98,20 @@
         },
         onApprove: function (data, actions) {
           console.log('You have successfully created subscription ' + data.subscriptionID); // Optional message given to subscriber
-          data = {}
-          data.token = btoken;
-          data.userId = uid;
-          data.planId = paypal_plan_id;
-          data.plan = plan;
-          data.animalIds = animal_ids;
-          data.paypalSubId = data.subscriptionID;
+          pdata = {}
+          pdata.token = btoken;
+          pdata.userId = uid;
+          pdata.planId = paypal_plan_id;
+          pdata.plan = plan;
+          pdata.animalIds = animal_ids;
+          pdata.paypalSubId = data.subscriptionID;
           $.ajax({
             type: "POST",
             beforeSend: function (xhr) {
               xhr.setRequestHeader('uid', uid);
             },
             url: "https://dogapp-68777.uc.r.appspot.com/rest/payments/paypal/subscribe",
-            data: JSON.stringify(data),// now data come in this function
+            data: JSON.stringify(pdata),// now data come in this function
             contentType: "application/json; charset=utf-8",
             crossDomain: true,
             dataType: "json",

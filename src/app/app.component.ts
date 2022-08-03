@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   animalIds = new URLSearchParams(window.location.search).get('animal_ids');
   uid = new URLSearchParams(window.location.search).get('uid');
   plan_id = new URLSearchParams(window.location.search).get('plan_id');
-  paypal_plan_id = undefined;
+  paypal_plan_id = new URLSearchParams(window.location.search).get('paypal_plan_id');
   frequency = new URLSearchParams(window.location.search).get('frequency');
   price = new URLSearchParams(window.location.search).get('price');
   version = new URLSearchParams(window.location.search).get('version');
