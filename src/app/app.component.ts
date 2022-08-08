@@ -181,6 +181,10 @@ export class AppComponent implements OnInit{
     this.analytics.logEvent('valid_card_by_bluesnap', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
   }
 
+  successPaypal() {
+    this.analytics.logEvent('success_paypal', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+  }
+
   inValidBluesnap() {
     const errEl = document.getElementById('error-content');
     if(errEl  != null) {

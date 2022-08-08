@@ -10,8 +10,9 @@
   <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
   <style>
     .panel {
-      width: 70%;
+      width: 95%;
       margin: 2em auto;
+      border:none;
     }
     .panel-body {
       width: 90%;
@@ -84,10 +85,13 @@
     var uid = urlParams.get('uid');
     var email = urlParams.get('email');
     var plan =urlParams.get('plan');
+    var version =urlParams.get('version');
     var animal_ids = urlParams.get('animal_ids') != null ? urlParams.get('animal_ids').split(",").map(n => {return Number(n)}) : null;
     console.log(animal_ids);
     if(paypal_plan_id) {
+      if(!version){
       paypal.Buttons({
+        fundingSource: paypal.FUNDING.PAYPAL,
         createSubscription: function (data, actions) {
           return actions.subscription.create({
             'plan_id': paypal_plan_id, // Creates the subscription
@@ -105,6 +109,7 @@
           pdata.plan = plan;
           pdata.animalIds = animal_ids;
           pdata.paypalSubId = data.subscriptionID;
+          $('#success-paypal').click()
           $.ajax({
             type: "POST",
             beforeSend: function (xhr) {
@@ -137,8 +142,63 @@
           $('#loading-body').hide();
         }
       }).render('#paypal-button-container');
+      } else {
+        paypal.Buttons({
+          createSubscription: function (data, actions) {
+            return actions.subscription.create({
+              'plan_id': paypal_plan_id, // Creates the subscription
+              'application_context': {
+                'shipping_preference': 'NO_SHIPPING'
+              }
+            });
+          },
+          onApprove: function (data, actions) {
+            console.log('You have successfully created subscription ' + data.subscriptionID); // Optional message given to subscriber
+            pdata = {}
+            pdata.token = btoken;
+            pdata.userId = uid;
+            pdata.planId = paypal_plan_id;
+            pdata.plan = plan;
+            pdata.animalIds = animal_ids;
+            pdata.paypalSubId = data.subscriptionID;
+            $('#success-paypal').click()
+            $.ajax({
+              type: "POST",
+              beforeSend: function (xhr) {
+                xhr.setRequestHeader('uid', uid);
+              },
+              url: "https://dogapp-67827.appspot.com/rest/payments/paypal/subscribe",
+              data: JSON.stringify(pdata),// now data come in this function
+              contentType: "application/json; charset=utf-8",
+              crossDomain: true,
+              dataType: "json",
+              success: function (data, status, jqXHR) {
+                $("#payment-form").hide();
+                $("#payment-success").show();
+                loadingDiv.style.visibility = 'hidden';
+                $('#loading-body').hide();
+              },
+              error: function (jqXHR, status) {
+                $('#error-body').show();
+                $('#error-content').text(jqXHR.responseJSON.message);
+                loadingDiv.style.visibility = 'hidden';
+                $('#loading-body').hide();
+              }
+            });
+          },
+          onError: function (err) {
+            // For example, redirect to a specific error page
+            $('#error-body').show();
+            $('#error-content').text(err);
+            loadingDiv.style.visibility = 'hidden';
+            $('#loading-body').hide();
+          }
+        }).render('#paypal-button-container');
+      }
     }
 
+
+    if(!version){
     /* Defining bsObj: object that stores Hosted Payment Fields
     event handlers, styling, placeholder text, etc. */
     var bsObj = {
@@ -280,7 +340,7 @@
           }
         }
       );
-    }
+    }}
   </script>
 
 </body>
