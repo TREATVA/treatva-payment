@@ -202,6 +202,11 @@ export class AppComponent implements OnInit{
     this.analytics.logEvent('success_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
    }
 
+   clickOnPaypalButton() {
+     this.analytics.logEvent('click_on_paypal', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+
+   }
+
   clickOnSubscribeError() {
     const errEl = document.getElementById('error-content');
     //const duration = (new Date().getTime() - this.start_time.getTime())/1000;

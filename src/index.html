@@ -101,6 +101,9 @@
             }
           });
         },
+        onClick: function(data, actions) {
+          $("#click-paypal-button").click()
+        },
         onApprove: function (data, actions) {
           console.log('You have successfully created subscription ' + data.subscriptionID); // Optional message given to subscriber
           pdata = {}
@@ -152,6 +155,9 @@
                 'shipping_preference': 'NO_SHIPPING'
               }
             });
+          },
+          onClick: function (data, actions) {
+            $("#click-paypal-button").click()
           },
           onApprove: function (data, actions) {
             console.log('You have successfully created subscription ' + data.subscriptionID); // Optional message given to subscriber

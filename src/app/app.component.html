@@ -57,9 +57,8 @@
     <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}}</p>
   </div>
   <hr *ngIf="paypal_plan_id && !version" style="margin-top: -7%;border-top: 1px solid darkgrey;"/>
-
-  <div *ngIf="paypal_plan_id && !version" id="paypal-button-container" class="panel-body"></div>
-  <div *ngIf="paypal_plan_id" id="paypal-button-container"  class="panel-body"></div>
+  <div id="click-paypal-button" (click)="clickOnPaypalButton()"></div>
+  <div *ngIf="paypal_plan_id" id="paypal-button-container" class="panel-body"></div>
 </div>
 <div id="payment-success" class="successScreen" style="display: none">
   <div class="card">
