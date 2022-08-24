@@ -4,7 +4,7 @@
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
   {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meals / Day')}}
   <br *ngIf="plan != 'FREE_DELIVERY'"/>
-  <span *ngIf="plan != 'FREE_DELIVERY'" style="font-size:medium">Bonus: Free Shipping (all dogs)</span>
+  <span *ngIf="plan != 'FREE_DELIVERY'" style="font-size:medium">Bonus: Unlimited deliveries (all dogs)</span>
 </div>
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
   <form class="panel-body" *ngIf="!version" id="checkout-form" action="#">
