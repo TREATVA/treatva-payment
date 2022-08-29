@@ -37,7 +37,7 @@ export class AppComponent implements OnInit{
     if (this.uid) {
       this.analytics.logEvent('payment_page_landing', {"uid": this.uid, "plan": this.plan, "plan_id": this.plan_id});
     }
-    this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY' ? 'FREE_DELIVERY' : this.plan + (this.trial ? '_TRIAL' : '') + (this.trial ? '_TRIAL' : '') + '_' + (this.animalIds != null ? this.animalIds.split(',').length : 0)})
+    this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY' ? 'FREE_DELIVERY' : this.plan + (this.trial ? '_TRIAL' : '') + '_' + (this.animalIds != null ? this.animalIds.split(',').length : 0)})
       .subscribe(res=>{
         let monthId = res.planPeriodsWithPlanIds['MONTHLY'];
         let quartId = res.planPeriodsWithPlanIds['QUARTERLY'];
