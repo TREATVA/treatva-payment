@@ -2,7 +2,7 @@
   <p id="error-content">Oops payment isn't completed</p>
 </div>
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
-  {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? '1 Meal / Day': '3 Meals / Day')}}
+  {{plan == 'FREE_DELIVERY' ? 'Free deliveries' : (plan == 'MEAL_1' ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}
   <br *ngIf="plan != 'FREE_DELIVERY'"/>
   <span *ngIf="plan != 'FREE_DELIVERY'" style="font-size:medium">Bonus: Unlimited deliveries (all dogs)</span>
 </div>
@@ -39,7 +39,7 @@
       <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}}</p>
     </div>
     <div style="text-align: center; margin-top: 7%">
-      <button class="btn btn-success btn-lg col-xs-6" style="width:100%; font-size: 5vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">Subscribe</button>
+      <button class="btn btn-success btn-lg col-xs-6" style="width:100%; font-size: 5vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">3 Day Trial & Subscribe</button>
       <br/>
       <p style="font-size: x-small">Cancel anytime  <i class="fa fa-lock" style="margin-left: 1%" aria-hidden="true"> Secure payment</i></p>
     </div>
@@ -59,6 +59,7 @@
   <hr *ngIf="paypal_plan_id && !version" style="margin-top: -7%;border-top: 1px solid darkgrey;"/>
   <div id="click-paypal-button" (click)="clickOnPaypalButton()"></div>
   <div *ngIf="paypal_plan_id" id="paypal-button-container" class="panel-body"></div>
+  <p style="font-size: x-small; text-align: center" *ngIf="version && paypal_plan_id"> <i class="fa fa-lock" style="margin-left: 1%" aria-hidden="true"> Secure payment</i></p>
 </div>
 <div id="payment-success" class="successScreen" style="display: none">
   <div class="card">

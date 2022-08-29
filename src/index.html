@@ -88,10 +88,15 @@
     var plan =urlParams.get('plan');
     var version =urlParams.get('version');
     var animal_ids = urlParams.get('animal_ids') != null ? urlParams.get('animal_ids').split(",").map(n => {return Number(n)}) : null;
+    var trial =urlParams.get('trial');
     console.log(animal_ids);
     if(paypal_plan_id) {
       if(!version){
       paypal.Buttons({
+        style: {
+          shape:  'rect',
+          label:  'pay'
+        },
         fundingSource: paypal.FUNDING.PAYPAL,
         createSubscription: function (data, actions) {
           return actions.subscription.create({
@@ -113,6 +118,7 @@
           pdata.plan = plan;
           pdata.animalIds = animal_ids;
           pdata.paypalSubId = data.subscriptionID;
+          if(trial) pdata.trial = true;
           $('#success-paypal').click()
           $.ajax({
             type: "POST",
@@ -148,6 +154,10 @@
       }).render('#paypal-button-container');
       } else {
         paypal.Buttons({
+          style: {
+            shape:  'rect',
+            label:  'pay'
+          },
           createSubscription: function (data, actions) {
             return actions.subscription.create({
               'plan_id': paypal_plan_id, // Creates the subscription
@@ -316,7 +326,7 @@
             data.planId = plan_id;
             data.plan = plan;
             data.animalIds = animal_ids;
-
+            if(trial) data.trial = true;
 
             $.ajax({
               type: "POST",
