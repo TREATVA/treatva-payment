@@ -89,6 +89,10 @@
     var version =urlParams.get('version');
     var animal_ids = urlParams.get('animal_ids') != null ? urlParams.get('animal_ids').split(",").map(n => {return Number(n)}) : null;
     var trial =urlParams.get('trial');
+
+    if(trial){
+      if(trial.toLowerCase() === 'false') trial = null;
+    }
     console.log(animal_ids);
     if(paypal_plan_id) {
       if(!version){

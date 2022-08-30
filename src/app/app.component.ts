@@ -31,6 +31,9 @@ export class AppComponent implements OnInit{
 
   constructor(private paymentService: PaymentService,
               private analytics: AngularFireAnalytics) {
+    if(this.trial){
+      if(this.trial.toLowerCase() === 'false') this.trial = null;
+    }
   }
 
   ngOnInit() {
