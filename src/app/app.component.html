@@ -7,6 +7,12 @@
   <span *ngIf="plan != 'FREE_DELIVERY'" style="font-size:medium">Bonus: Unlimited deliveries (all dogs)</span>
 </div>
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
+  <div *ngIf="paypal_plan_id && !version" id="paypal-button-container" class="panel-body"></div>
+  <div *ngIf="paypal_plan_id && version" id="paypal-button-container"  class="panel-body"></div>
+  <hr *ngIf="paypal_plan_id && !version" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
+  <p *ngIf="paypal_plan_id && !version" style="display: inline-block; float: left; margin-left: 1%; margin-right: 1%">OR</p>
+  <hr *ngIf="paypal_plan_id && !version" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
+
   <form class="panel-body" *ngIf="!version" id="checkout-form" action="#">
     <div class="row">
       <!--Hosted Field for CC number-->
@@ -56,9 +62,6 @@
     <p style="margin:0 0 0">{{detailString}}</p>
     <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}}</p>
   </div>
-  <hr *ngIf="paypal_plan_id && !version" style="margin-top: -7%;border-top: 1px solid darkgrey;"/>
-  <div id="click-paypal-button" (click)="clickOnPaypalButton()"></div>
-  <div *ngIf="paypal_plan_id" id="paypal-button-container" class="panel-body"></div>
   <p style="font-size: x-small; text-align: center" *ngIf="version && paypal_plan_id"> <i class="fa fa-lock" style="margin-left: 1%" aria-hidden="true"> Secure payment</i></p>
 </div>
 <div id="payment-success" class="successScreen" style="display: none">
