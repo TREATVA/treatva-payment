@@ -46,9 +46,33 @@ export class AppComponent implements OnInit{
         let quartId = res.planPeriodsWithPlanIds['QUARTERLY'];
         let ev6monthId = res.planPeriodsWithPlanIds['EVERY_6_MONTHS'];
         let annuallyId = res.planPeriodsWithPlanIds['ANNUALLY'];
+        let weeklyId = res.planPeriodsWithPlanIds['WEEKLY'];
         let animalCount  = this.animalIds == null ? 0 :this.animalIds.split(',').length;
         let multiplyPart;
-        if(monthId != null && monthId == this.plan_id){
+        if(weeklyId != null && weeklyId == this.plan_id) {
+          if(this.customDetails) {
+            if(this.frequency == 'day') {
+              multiplyPart = '7 days'
+            } else if(this.frequency == 'week') {
+              multiplyPart = '4 weeks'
+            }  else {
+              multiplyPart = '1 week'
+            }
+          } else {
+            multiplyPart = '1 week'
+          }
+          this.period = 'Weekly';
+          if(this.plan == 'FREE_DELIVERY'){
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+            this.total = 1.49 ;
+          } else if(this.plan == 'MEAL_1'){
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart + " X " + animalCount + " animal/s"
+            this.total = 2.79 * animalCount;
+          } else {
+            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X " + multiplyPart + " X " + animalCount + " animal/s"
+            this.total = 4.99 * animalCount;
+          }
+        } else if(monthId != null && monthId == this.plan_id){
           if(this.customDetails) {
               if(this.frequency == 'day') {
                 multiplyPart = '31 days'
