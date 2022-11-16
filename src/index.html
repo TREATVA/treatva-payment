@@ -86,6 +86,8 @@
     var uid = urlParams.get('uid');
     var email = urlParams.get('email');
     var plan =urlParams.get('plan');
+    var newShop =urlParams.get('new-shop');
+    var price =urlParams.get('price');
     var version =urlParams.get('version');
     var animal_ids = urlParams.get('animal_ids') != null ? urlParams.get('animal_ids').split(",").map(n => {return Number(n)}) : null;
     var trial =urlParams.get('trial');
@@ -121,6 +123,8 @@
           pdata.planId = paypal_plan_id;
           pdata.plan = plan;
           pdata.animalIds = animal_ids;
+          pdata.newShop = newShop != null;
+          pdata.price = price
           pdata.paypalSubId = data.subscriptionID;
           if(trial) pdata.trial = true;
           $('#success-paypal').click()
@@ -182,6 +186,8 @@
             pdata.plan = plan;
             pdata.animalIds = animal_ids;
             pdata.paypalSubId = data.subscriptionID;
+            pdata.newShop = newShop != null;
+            pdata.price = price
             $('#success-paypal').click()
             $.ajax({
               type: "POST",
@@ -330,6 +336,8 @@
             data.planId = plan_id;
             data.plan = plan;
             data.animalIds = animal_ids;
+            data.newShop = newShop != null;
+            data.price = price
             if(trial) data.trial = true;
 
             $.ajax({
