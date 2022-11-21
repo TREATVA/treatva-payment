@@ -188,9 +188,6 @@ export class AppComponent implements OnInit{
           }
         }
         if(this.total) {
-          if (this.newShop != null && this.newShop.trim() != ''){
-            if(animalCount > 1) this.total = this.total / animalCount;
-          }
           this.total = +this.total.toFixed(2)
         } else if(this.price != null){
           this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY'  ? 'FREE_DELIVERY'
@@ -340,9 +337,6 @@ export class AppComponent implements OnInit{
                 }
               }
               if(this.total) {
-                if (this.newShop != null && this.newShop.trim() != ''){
-                  if(animalCount > 1) this.total = this.total / animalCount;
-                }
                 this.total = +this.total.toFixed(2)
               }});
         }
