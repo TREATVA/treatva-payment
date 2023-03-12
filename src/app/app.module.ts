@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import { ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import {AngularFireAnalytics, AngularFireAnalyticsModule} from "@angular/fire/compat/analytics";
 import {AngularFireModule} from "@angular/fire/compat";
+import {UserService} from "./service/user.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,10 @@ import {AngularFireModule} from "@angular/fire/compat";
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAnalyticsModule
+    AngularFireAnalyticsModule,
+    FormsModule
   ],
-  providers: [PaymentService, ScreenTrackingService,UserTrackingService, AngularFireAnalytics],
+  providers: [PaymentService, UserService, ScreenTrackingService,UserTrackingService, AngularFireAnalytics],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

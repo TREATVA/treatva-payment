@@ -5,6 +5,7 @@
   {{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan == 'MEAL_1' ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}
   <br *ngIf="plan != 'FREE_DELIVERY'"/>
   <span *ngIf="plan != 'FREE_DELIVERY'" style="font-size:medium">Bonus: Unlimited deliveries (all dogs)</span>
+  <input *ngIf="isAnonymous" id="email"  [(ngModel)]="enteredEmail" type="email"  placeholder="example@email.com">
 </div>
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
   <div *ngIf="paypal_plan_id && !version" id="paypal-button-container" class="panel-body"></div>
@@ -50,6 +51,7 @@
     </div>
 
     <div id="subscribe-analytics" (click)="clickOnSubscribe()"></div>
+    <div id="click-paypal-button" (click)="clickOnPaypalButton()"></div>
     <div id="valid-bluesnap-analytics" (click)="validBluesnap()"></div>
     <div id="success-paypal" (click)="successPaypal()"></div>
     <div id="invalid-bluesnap-analytics" (click)="inValidBluesnap()"></div>

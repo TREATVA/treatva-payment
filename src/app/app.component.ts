@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PaymentService} from "./service/payment.service";
 import {AngularFireAnalytics} from "@angular/fire/compat/analytics";
+import {UserService} from "./service/user.service";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ export class AppComponent implements OnInit{
   plan = new URLSearchParams(window.location.search).get('plan');
   animalIds = new URLSearchParams(window.location.search).get('animal_ids');
   uid = new URLSearchParams(window.location.search).get('uid');
+  isAnonymous = false;
+  enteredEmail: string = '';
   plan_id = new URLSearchParams(window.location.search).get('plan_id');
   paypal_plan_id = new URLSearchParams(window.location.search).get('paypal_plan_id');
   frequency = new URLSearchParams(window.location.search).get('frequency');
@@ -31,6 +34,7 @@ export class AppComponent implements OnInit{
   customDetails = (this.price !== null && this.frequency !== null) && (this.price !== '' && this.frequency !== '');
 
   constructor(private paymentService: PaymentService,
+              private userService: UserService,
               private analytics: AngularFireAnalytics) {
     if(this.trial){
       if(this.trial.toLowerCase() === 'false') this.trial = null;
@@ -40,6 +44,10 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     if (this.uid) {
       this.analytics.logEvent('payment_page_landing', {"uid": this.uid, "plan": this.plan, "plan_id": this.plan_id});
+      this.userService.getUser(this.uid).subscribe(u=>{
+        // @ts-ignore
+        this.isAnonymous = u.anon;
+      });
     }
     this.paymentService.getPlan({uid: this.uid, planId: this.plan == 'FREE_DELIVERY'  ? 'FREE_DELIVERY' + (this.newShop != null && this.price != null
         ? '_' + this.price.replace('.', '') : '') :  this.plan
@@ -365,6 +373,10 @@ export class AppComponent implements OnInit{
   clickOnSubscribe() {
     console.log('subscribing')
     //const duration =  (new Date().getTime() - this.start_time.getTime())/1000;
+    if(this.enteredEmail !== ''){
+      // @ts-ignore
+      this.userService.putEmail(this.uid, this.enteredEmail).subscribe(res=>{});
+    }
     this.analytics.logEvent('click_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
 
   }
@@ -396,7 +408,10 @@ export class AppComponent implements OnInit{
 
   clickOnPaypalButton() {
     this.analytics.logEvent('click_on_paypal', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
-
+    if(this.enteredEmail !== ''){
+      // @ts-ignore
+      this.userService.putEmail(this.uid, this.enteredEmail).subscribe(res=>{});
+    }
   }
 
   clickOnSubscribeError() {
