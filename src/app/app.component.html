@@ -5,7 +5,6 @@
   {{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan == 'MEAL_1' ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}
   <br *ngIf="plan != 'FREE_DELIVERY'"/>
   <span *ngIf="plan != 'FREE_DELIVERY'" style="font-size:medium">Bonus: Unlimited deliveries (all dogs)</span>
-  <input *ngIf="isAnonymous" id="email"  [(ngModel)]="enteredEmail" type="email"  placeholder="example@email.com">
 </div>
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
   <div *ngIf="paypal_plan_id && !version" id="paypal-button-container" class="panel-body"></div>
@@ -15,6 +14,9 @@
   <hr *ngIf="paypal_plan_id && !version" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
 
   <form class="panel-body" *ngIf="!version" id="checkout-form" action="#">
+    <div style="text-align: center; width: 100%">
+      <input *ngIf="isAnonymous" id="email"  [(ngModel)]="enteredEmail" type="email"  placeholder="example@email.com">
+    </div>
     <div class="row">
       <!--Hosted Field for CC number-->
       <div class="form-group col-md-12">
