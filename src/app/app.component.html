@@ -14,9 +14,6 @@
   <hr *ngIf="paypal_plan_id && !version" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
 
   <form class="panel-body" *ngIf="!version" id="checkout-form" action="#">
-    <div style="text-align: center; width: 100%">
-      <input *ngIf="isAnonymous" id="email"  [(ngModel)]="enteredEmail" type="email"  placeholder="example@email.com">
-    </div>
     <div class="row">
       <!--Hosted Field for CC number-->
       <div class="form-group col-md-12">
@@ -41,6 +38,11 @@
         <div class="form-control" id="cvv" data-bluesnap="cvv" (click)="clickOnCVV()"></div>
         <span class="helper-text" id='cvv-help'></span>
       </div>
+    </div>
+    <div style="text-align: left; width: 100%; margin-bottom: 10%">
+      <p>Contact details</p>
+      <input *ngIf="isAnonymous" id="email"  [(ngModel)]="enteredEmail" type="email"  style="width: 85%" placeholder="example@email.com">
+      <button matTooltip="For future needed support by our customer service" mat-icon-button><mat-icon>question_mark</mat-icon></button>
     </div>
     <div style="text-align: center; width: 100%">
       <p style="margin:0 0 0">{{detailString}}</p>

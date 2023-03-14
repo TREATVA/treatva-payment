@@ -371,12 +371,6 @@ export class AppComponent implements OnInit{
   }
 
   clickOnSubscribe() {
-    console.log('subscribing')
-    //const duration =  (new Date().getTime() - this.start_time.getTime())/1000;
-    if(this.enteredEmail !== ''){
-      // @ts-ignore
-      this.userService.putEmail(this.uid, this.enteredEmail).subscribe(res=>{});
-    }
     this.analytics.logEvent('click_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
 
   }
@@ -387,6 +381,10 @@ export class AppComponent implements OnInit{
 
   successPaypal() {
     this.analytics.logEvent('success_paypal', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
+    if(this.enteredEmail !== ''){
+      // @ts-ignore
+      this.userService.putEmail(this.uid, this.enteredEmail).subscribe(res=>{});
+    }
   }
 
   inValidBluesnap() {
@@ -404,14 +402,14 @@ export class AppComponent implements OnInit{
     console.log('subscribing')
     //const duration = (new Date().getTime() - this.start_time.getTime())/1000;
     this.analytics.logEvent('success_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
-  }
-
-  clickOnPaypalButton() {
-    this.analytics.logEvent('click_on_paypal', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     if(this.enteredEmail !== ''){
       // @ts-ignore
       this.userService.putEmail(this.uid, this.enteredEmail).subscribe(res=>{});
     }
+  }
+
+  clickOnPaypalButton() {
+    this.analytics.logEvent('click_on_paypal', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
   }
 
   clickOnSubscribeError() {
