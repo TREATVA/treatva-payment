@@ -15,7 +15,7 @@ export class UserService {
         uid: uid
       })
     };
-    return this.httpClient.get<User>(`http://localhost:8080/rest/users/is-anonymous`, httpOptions);
+    return this.httpClient.get<User>(`https://dogapp-67827.appspot.com/rest/users/is-anonymous`, httpOptions);
   }
 
   putEmail( uid: string, email: string ): Observable<any> {
@@ -24,6 +24,6 @@ export class UserService {
         uid: uid
       })
     };
-    return this.httpClient.put<any>(`http://localhost:8080/rest/users/set-email/${email}`, {}, httpOptions);
+    return this.httpClient.put<any>(`https://dogapp-67827.appspot.com/rest/users/set-email/${email}`, {}, httpOptions);
   }
 }

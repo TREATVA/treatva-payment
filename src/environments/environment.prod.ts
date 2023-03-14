@@ -11,5 +11,5 @@ export const environment = {
     measurementId: 'G-KB3DBR4FC7',
   },
   production: true,
-  apiUrl:  "http://localhost:8080"
+  apiUrl:  "https://dogapp-67827.appspot.com"
 };
