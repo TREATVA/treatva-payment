@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
   total: number | undefined;
   period: string | undefined;
   gifts: string | undefined;
+  showEmailHint: boolean = false;
 
   start_time: Date = new Date();
 
