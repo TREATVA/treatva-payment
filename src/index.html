@@ -147,7 +147,12 @@
             },
             error: function (jqXHR, status) {
               $('#error-body').show();
-              $('#error-content').text(jqXHR.responseJSON.message);
+              var err = jqXHR.responseJSON.message;
+              if(err.includes('Please contact the issuing bank.')){
+                $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
+              } else {
+                $('#error-content').text(err);
+              }
               loadingDiv.style.visibility = 'hidden';
               $('#loading-body').hide();
             }
@@ -156,7 +161,11 @@
         onError: function (err) {
           // For example, redirect to a specific error page
           $('#error-body').show();
-          $('#error-content').text(err);
+          if(err.includes('Please contact the issuing bank.')){
+            $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
+          } else {
+            $('#error-content').text(err);
+          }
           loadingDiv.style.visibility = 'hidden';
           $('#loading-body').hide();
         }
@@ -208,7 +217,12 @@
               },
               error: function (jqXHR, status) {
                 $('#error-body').show();
-                $('#error-content').text(jqXHR.responseJSON.message);
+                var err = jqXHR.responseJSON.message;
+                if(err.includes('Please contact the issuing bank.')){
+                  $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
+                } else {
+                  $('#error-content').text(err);
+                }
                 loadingDiv.style.visibility = 'hidden';
                 $('#loading-body').hide();
               }
@@ -217,7 +231,11 @@
           onError: function (err) {
             // For example, redirect to a specific error page
             $('#error-body').show();
-            $('#error-content').text(err);
+            if(err.includes('Please contact the issuing bank.')){
+              $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
+            } else {
+              $('#error-content').text(err);
+            }
             loadingDiv.style.visibility = 'hidden';
             $('#loading-body').hide();
           }
@@ -247,6 +265,8 @@
           // Handle a change in validation
           changeImpactedElement(tagId, "hosted-field-valid hosted-field-focus", "hosted-field-invalid");
           $("#" + tagId + "-help").removeClass('helper-text-green').text(errorCode + " - " + errorDescription);
+          console.log(errorDescription)
+          $("#submit-button").prop("disabled", true)
         },
         onType: function(tagId, cardType, cardData) {
           console.log('Typeing'+tagId)
@@ -260,6 +280,7 @@
           // Handle a change in validation
           changeImpactedElement(tagId, "hosted-field-focus hosted-field-invalid", "hosted-field-valid");
           $("#" + tagId + "-help").text("");
+          $("#submit-button").prop("disabled", false)
         }
       },
       //styling is optional
@@ -359,7 +380,12 @@
 
               error: function (jqXHR, status) {
                 $('#error-body').show();
-                $('#error-content').text(jqXHR.responseJSON.message);
+                var errorMsg = jqXHR.responseJSON.message;
+                if(errorMsg.includes('Please contact the issuing bank.')){
+                  $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
+                } else {
+                  $('#error-content').text(jqXHR.responseJSON.message);
+                }
                 $("#subscribe-analytics-error").click()
                 loadingDiv.style.visibility = 'hidden';
                 $('#loading-body').hide();
