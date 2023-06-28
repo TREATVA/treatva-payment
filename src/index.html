@@ -251,7 +251,6 @@
       token: btoken,
       onFieldEventHandler: {
         onFocus: function(tagId) {
-          console.log('Focus'+tagId)
           $("#"+tagId+'-analytics').click()
           // Handle focus
           changeImpactedElement(tagId, "hosted-field-valid hosted-field-invalid", "hosted-field-focus");
@@ -264,15 +263,21 @@
         onError: function(tagId, errorCode, errorDescription) {
           // Handle a change in validation
           changeImpactedElement(tagId, "hosted-field-valid hosted-field-focus", "hosted-field-invalid");
-          $("#" + tagId + "-help").removeClass('helper-text-green').text(errorCode + " - " + errorDescription);
-          console.log(errorDescription)
-          $("#submit-button").prop("disabled", true)
+          var errorMessage;
+          if(errorDescription === 'invalidExpDate') {
+            errorMessage = 'Enter valid exp date'
+          } else if(errorDescription === 'invalidCvv') {
+            errorMessage = 'Enter valid CVV'
+          } else if(errorDescription === 'invalidCcNumber') {
+            errorMessage = 'Enter valid card number'
+          }
+          $("#" + tagId + "-help").removeClass('helper-text-green').text(errorMessage);
+          $('#loading-body').hide();
         },
         onType: function(tagId, cardType, cardData) {
-          console.log('Typeing'+tagId)
           // get card type from cardType and display card image
           $("#card-logo > img").attr("src", cardUrl[cardType]);
-          if (null != cardData) {
+          if (null != cardData && tagId !== 'ccn') {
             $("#" + tagId + "-help").addClass('helper-text-green').text(JSON.stringify(cardData));
           }
         },
@@ -280,7 +285,6 @@
           // Handle a change in validation
           changeImpactedElement(tagId, "hosted-field-focus hosted-field-invalid", "hosted-field-valid");
           $("#" + tagId + "-help").text("");
-          $("#submit-button").prop("disabled", false)
         }
       },
       //styling is optional
