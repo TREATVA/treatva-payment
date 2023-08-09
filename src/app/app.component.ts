@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   newShop = new URLSearchParams(window.location.search).get('new-shop');
   version = new URLSearchParams(window.location.search).get('version');
   trial = new URLSearchParams(window.location.search).get('trial');
+  subscriptionId = new URLSearchParams(window.location.search).get('subId')
 
   detailString: string | undefined;
   total: number | undefined;

@@ -1,3 +1,7 @@
+<app-update-plan *ngIf="subscriptionId"></app-update-plan>
+
+<div *ngIf="!subscriptionId">
+
 <div id="error-body" class="alert alert-danger" style="display: none">
   <p id="error-content">Oops payment isn't completed</p>
 </div>
@@ -98,5 +102,6 @@
   <div id="loading" class="loading">
     <span style="margin-left: 15px;">Loading..</span>
   </div>
+</div>
 </div>
 

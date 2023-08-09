@@ -15,10 +15,12 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
+import {UpdatePlanComponent} from "./components/update-plan/update-plan.component";
 
 
 @NgModule({
   declarations: [
+    UpdatePlanComponent,
     AppComponent
   ],
   imports: [
