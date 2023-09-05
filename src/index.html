@@ -429,9 +429,12 @@
                   if(errorMsg.includes('Please contact the issuing bank.')){
                     $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
                   } else {
-                    $('#error-content').text(jqXHR.responseJSON.message);
+                    handleErrorInBluesnap(errorMsg)
+                    $("#subscribe-analytics-error").click()
+                    $('#error-content').text(jqXHR.responseJSON.message)
+                    $("#subscribe-analytics-error").click()
                   }
-                  $("#subscribe-analytics-error").click()
+
                   loadingDiv.style.visibility = 'hidden';
                   $('#loading-body').hide();
                 }
@@ -442,7 +445,29 @@
           }
         );
       }
-    }}
+    }
+
+    function handleErrorInBluesnap(errorMsg){
+      $.ajax({
+        type: "GET",
+        beforeSend: function(xhr){xhr.setRequestHeader('uid', uid);},
+        url: "https://dogapp-67827.appspot.com/rest/payments/bluesnap/token",
+        crossDomain: true,
+        success: function (data, status, jqXHR) {
+          currentUrlParts = window.location.href.split('&')
+          console.log('URL first part' + currentUrlParts[0]);
+          currentUrlParts[0] = data;
+          currentUrlParts.push('error='+errorMsg);
+          window.location.replace(currentUrlParts.join('&'));
+        },
+
+        error: function (jqXHR, status) {
+
+        }
+      });
+    }
+
+    }
   </script>
 </body>
 </html>

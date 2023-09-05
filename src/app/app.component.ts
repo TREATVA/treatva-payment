@@ -24,14 +24,14 @@ export class AppComponent implements OnInit{
   version = new URLSearchParams(window.location.search).get('version');
   trial = new URLSearchParams(window.location.search).get('trial');
   subscriptionId = new URLSearchParams(window.location.search).get('subId')
+  errorDetails = new URLSearchParams(window.location.search).get('error')
+  errorContent = "Oops payment isn't completed";
 
   detailString: string | undefined;
   total: number | undefined;
   period: string | undefined;
   gifts: string | undefined;
   showEmailHint: boolean = false;
-
-  start_time: Date = new Date();
 
   customDetails = (this.price !== null && this.frequency !== null) && (this.price !== '' && this.frequency !== '');
 
@@ -44,6 +44,9 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
+    if(this.errorDetails){
+      this.errorDetails = decodeURIComponent(this.errorDetails);
+    }
     if (this.uid) {
       this.analytics.logEvent('payment_page_landing', {"uid": this.uid, "plan": this.plan, "plan_id": this.plan_id});
       this.userService.getUser(this.uid).subscribe(u=>{

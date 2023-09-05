@@ -3,8 +3,11 @@
 <div *ngIf="!subscriptionId">
 
 <div id="error-body" class="alert alert-danger" style="display: none">
-  <p id="error-content">Oops payment isn't completed</p>
+  <p id="error-content">{{errorContent}}</p>
 </div>
+  <div id="error-body-from-url" class="alert alert-danger" *ngIf="errorDetails">
+    <p id="error-body-from-url-content">{{errorDetails}}</p>
+  </div>
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
   {{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan?.includes('MEAL_1') ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}
   <br *ngIf="plan != 'FREE_DELIVERY'"/>
