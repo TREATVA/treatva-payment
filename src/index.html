@@ -457,7 +457,11 @@
           currentUrlParts = window.location.href.split('&')
           console.log('URL first part' + currentUrlParts[0]);
           currentUrlParts[0] = data;
-          currentUrlParts.push('error='+errorMsg);
+          if(currentUrlParts[currentUrlParts.length - 1].includes('error=')){
+            currentUrlParts[currentUrlParts.length - 1] = 'error='+errorMsg;
+          } else{
+            currentUrlParts.push('error='+errorMsg);
+          }
           window.location.replace(currentUrlParts.join('&'));
         },
 
