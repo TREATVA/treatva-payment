@@ -451,6 +451,7 @@ export class AppComponent implements OnInit{
 
   clickOnSubscribeSuccess() {
     console.log('subscribing')
+    this.errorDetails='';
     //const duration = (new Date().getTime() - this.start_time.getTime())/1000;
     this.analytics.logEvent('success_on_subscribe', { "uid":this.uid, "plan": this.plan, "plan_id": this.plan_id});
     if(this.enteredEmail !== ''){
