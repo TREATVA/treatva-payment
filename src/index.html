@@ -428,7 +428,9 @@
                   var errorMsg = jqXHR.responseJSON.message;
                   if(errorMsg.includes('Please contact the issuing bank.')){
                     $('#error-content').text('Use Credit Card/PayPal (debit cards may be refused by your bank)');
-                  } else {
+                  } else if(errorMsg.includes('Transaction failed because there are no available processors')){
+                    $('#error-content').text('Use different type of Card or PayPal (Debit/Discover cards may be refused by your bank)');
+                  }else {
                     handleErrorInBluesnap(errorMsg)
                     $("#subscribe-analytics-error").click()
                     $('#error-content').text(jqXHR.responseJSON.message)
@@ -457,6 +459,9 @@
           currentUrlParts = window.location.href.split('&')
           console.log('URL first part' + currentUrlParts[0]);
           currentUrlParts[0] = data;
+          if(errorMsg.includes('Transaction failed because there are no available processors')){
+            errorMsg = 'Use different type of Card or PayPal (Debit/Discover cards may be refused by your bank)';
+          }
           if(currentUrlParts[currentUrlParts.length - 1].includes('error=')){
             currentUrlParts[currentUrlParts.length - 1] = 'error='+errorMsg;
           } else{
