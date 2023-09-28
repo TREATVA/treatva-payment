@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
   paypal_plan_id = new URLSearchParams(window.location.search).get('paypal_plan_id');
   frequency = new URLSearchParams(window.location.search).get('frequency');
   price = new URLSearchParams(window.location.search).get('price');
+  token = new URLSearchParams(window.location.search).get('token');
   newShop = new URLSearchParams(window.location.search).get('new-shop');
   version = new URLSearchParams(window.location.search).get('version');
   trial = new URLSearchParams(window.location.search).get('trial');

@@ -16,11 +16,11 @@
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
   <div *ngIf="paypal_plan_id && !version" id="paypal-button-container" class="panel-body"></div>
   <div *ngIf="paypal_plan_id && version" id="paypal-button-container"  class="panel-body"></div>
-  <hr *ngIf="paypal_plan_id && !version" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
-  <p *ngIf="paypal_plan_id && !version" style="display: inline-block; float: left; margin-left: 1%; margin-right: 1%">OR</p>
-  <hr *ngIf="paypal_plan_id && !version" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
+  <hr *ngIf="paypal_plan_id && !version && token" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
+  <p *ngIf="paypal_plan_id && !version && token" style="display: inline-block; float: left; margin-left: 1%; margin-right: 1%">OR</p>
+  <hr *ngIf="paypal_plan_id && !version && token" style="width:44%; margin-top: 2.9%;border-top: 1px solid darkgrey; display: inline-block; float: left"/>
 
-  <form class="panel-body" *ngIf="!version" id="checkout-form" action="#">
+  <form class="panel-body" *ngIf="!version && token" id="checkout-form" action="#">
     <div class="row" style="margin-bottom: -15px">
       <!--Hosted Field for CC number-->
       <div class="form-group col-md-12">
