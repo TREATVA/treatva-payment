@@ -27,6 +27,8 @@ export class AppComponent implements OnInit{
   subscriptionId = new URLSearchParams(window.location.search).get('subId')
   errorDetails = new URLSearchParams(window.location.search).get('error')
   errorContent = "Oops payment isn't completed";
+  rolls = new URLSearchParams(window.location.search).get('rolls_count');
+  bonusDetails = '1-time gift: 90 rolls';
 
   detailString: string | undefined;
   total: number | undefined;
@@ -41,6 +43,11 @@ export class AppComponent implements OnInit{
               private analytics: AngularFireAnalytics) {
     if(this.trial){
       if(this.trial.toLowerCase() === 'false') this.trial = null;
+    }
+    if(this.rolls === null || this.rolls === undefined || this.rolls === ''){
+      this.rolls = null;
+    } else {
+      this.bonusDetails = '1-time gift: '+this.rolls+' rolls';
     }
   }
 
