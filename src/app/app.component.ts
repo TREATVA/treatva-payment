@@ -28,6 +28,8 @@ export class AppComponent implements OnInit{
   errorDetails = new URLSearchParams(window.location.search).get('error')
   errorContent = "Oops payment isn't completed";
   rolls = new URLSearchParams(window.location.search).get('rolls_count');
+  now = new URLSearchParams(window.location.search).get('now');
+  nowDate = new Date();
   bonusDetails = '1-time gift: 90 rolls';
 
   detailString: string | undefined;
@@ -44,6 +46,29 @@ export class AppComponent implements OnInit{
     if(this.trial){
       if(this.trial.toLowerCase() === 'false') this.trial = null;
     }
+    if(this.now && this.now !== ''){
+      this.now = this.now.replace('%20', ' ');
+      let parts = this.now.split('.');
+      if(parts.length > 2){
+        let year = parts[2].split(' ')[0];
+        let month = parts[1];
+        let day = parts[0];
+        let partsTime = parts[2].split(' ')[1].split(':');
+        let time = '';
+        for(let i=0; i < partsTime.length - 1; ++i){
+          time += partsTime[i]
+          if(i !== partsTime.length - 2){
+            time += ':';
+          }
+        }
+        time += '.';
+        time += partsTime[partsTime.length-1];
+        time += 'Z';
+        let ISODate = year + '-' + month +'-' + day +'T' + time;
+        this.nowDate = new Date(ISODate);
+      }
+    }
+
     if(this.rolls === null || this.rolls === undefined || this.rolls === ''){
       this.rolls = null;
     } else {
@@ -413,7 +438,9 @@ export class AppComponent implements OnInit{
                 this.total = +this.total.toFixed(2)
               }});
         }
-
+        if(this.nowDate){
+          this.analytics.logEvent('loading_time', { "uid":this.uid, "duration": new Date().getTime() - this.nowDate.getTime()})
+        }
       });
   }
 
