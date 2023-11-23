@@ -9,10 +9,18 @@
     <p id="error-body-from-url-content">{{errorDetails}}</p>
   </div>
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
-  {{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan?.includes('MEAL_1') ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}
+  <span *ngIf="plan != null && !plan.includes('SHARED')">{{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan == 'MEAL_1' ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}</span>
+  <p *ngIf="plan != null && plan.includes('SHARED')">
+    Shared Meals
+    <br/>
+    <span style="font-size: smaller;">{{plan != null && plan.includes('MEAL_1') ? '2440 kibbles week (7 meals)' : '7320 kibbles week (21 meals)'}}</span>
+    <br/>
+    <span style="font-size: xx-small;">* kibbles are passing daily</span>
+  </p>
   <br *ngIf="plan != 'FREE_DELIVERY'"/>
   <p *ngIf="plan != null && plan != 'FREE_DELIVERY' && !plan.includes('NO_SHIPPING')" style="font-size:medium; margin: 0 0 0;">Bonus: Unlimited deliveries (all dogs)</p>
-  <p *ngIf="rolls" style="font-size:medium; margin: 0 0 0;">{{bonusDetails}}</p></div>
+  <p *ngIf="rolls" style="font-size:medium; margin: 0 0 0;">{{bonusDetails}}</p>
+</div>
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
   <div *ngIf="paypal_plan_id && !version" id="paypal-button-container" class="panel-body"></div>
   <div *ngIf="paypal_plan_id && version" id="paypal-button-container"  class="panel-body"></div>
