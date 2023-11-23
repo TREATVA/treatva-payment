@@ -90,7 +90,7 @@ export class AppComponent implements OnInit{
     if(this.plan_id){
       let planId = '';
       if(this.plan == 'FREE_DELIVERY') {
-        planId = 'FREE_DELIVERY' +  '_' + (this.newShop != null && this.price != null
+        planId = 'FREE_DELIVERY' +  '_' + (this.price != null
           ? '_' + this.price.replace('.', '') : '');
       } else if(this.plan != null && this.plan.includes('SHARED')){
         planId = this.plan + '_0' +  (this.price != null
@@ -98,7 +98,7 @@ export class AppComponent implements OnInit{
       } else {
         planId = this.plan
           + (this.trial ? '_TRIAL' : '') + '_'
-          + (this.animalIds != null ? this.animalIds.split(',').length : 0) + (this.newShop != null && this.price != null
+          + (this.animalIds != null ? this.animalIds.split(',').length : 0) + (this.price != null
             ? '_' + this.price.replace('.', '') : '');
       }
       this.paymentService.getPlan({uid: this.uid, planId: planId})
