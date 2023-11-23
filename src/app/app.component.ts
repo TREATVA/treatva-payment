@@ -90,7 +90,7 @@ export class AppComponent implements OnInit{
     if(this.plan_id){
       let planId = '';
       if(this.plan == 'FREE_DELIVERY') {
-        planId = 'FREE_DELIVERY' +  '_' + (this.price != null
+        planId = 'FREE_DELIVERY' +  (this.price != null
           ? '_' + this.price.replace('.', '') : '');
       } else if(this.plan != null && this.plan.includes('SHARED')){
         planId = this.plan + '_0' +  (this.price != null
