@@ -9,7 +9,7 @@
     <p id="error-body-from-url-content">{{errorDetails}}</p>
   </div>
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
-  <span *ngIf="plan != null && !plan.includes('SHARED')">{{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan == 'MEAL_1' ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}</span>
+  <span *ngIf="plan != null && !plan.includes('SHARED')">{{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan.includes('MEAL_1') ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}</span>
   <p *ngIf="plan != null && plan.includes('SHARED')">
     Shared Meals
     <br/>
