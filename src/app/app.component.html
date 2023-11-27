@@ -10,15 +10,14 @@
   </div>
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
   <span *ngIf="plan != null && !plan.includes('SHARED')">{{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan.includes('MEAL_1') ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}</span>
-  <p *ngIf="plan != null && plan.includes('SHARED')">
-    Shared Meals
-    <br/>
-    <span style="font-size: smaller;">{{plan != null && plan.includes('MEAL_1') ? (320 * 7) + ' kibbles week (7 meals)' : (320*3*7)+' kibbles week (21 meals)'}}</span>
-    <br/>
-    <span style="font-size: xx-small;">* kibbles are passing daily</span>
+  <p *ngIf="plan != null && plan.includes('SHARED')" style="margin: 0 0 0">
+    {{plan != null && plan.includes('MEAL_1') ? (320 * 7) + ' kibbles a week (7 meals)' : (320*3*7)+' kibbles a week (21 meals)'}}
   </p>
-  <br *ngIf="plan != 'FREE_DELIVERY'"/>
-  <p *ngIf="plan != null && plan != 'FREE_DELIVERY' && !plan.includes('NO_SHIPPING')" style="font-size:medium; margin: 0 0 0;">Bonus: Unlimited deliveries (all dogs)</p>
+  <p *ngIf="plan != null && plan.includes('SHARED')" style="font-size:small; margin: 0 0 0">
+    {{plan != null && plan.includes('MEAL_1') ? '320 kibbles a day shared between your dogs' : '960 kibbles a day shared between your dogs'}}
+  </p>
+  <br *ngIf="plan != null && plan != 'FREE_DELIVERY' && !plan.includes('SHARED')"/>
+  <p *ngIf="plan != null && plan != 'FREE_DELIVERY' && !plan.includes('NO_SHIPPING')" style="font-size:small; margin: 0 0 0;">Bonus: Unlimited deliveries (all dogs)</p>
   <p *ngIf="rolls" style="font-size:medium; margin: 0 0 0;">{{bonusDetails}}</p>
 </div>
 <div id="payment-form"  class="panel panel-default bootstrap-basic">
@@ -77,7 +76,7 @@
     </div>
     <div style="text-align: center; width: 100%; margin-top: 5%">
       <p style="margin:0 0 0">{{detailString}}</p>
-      <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}}</p>
+      <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}} {{detailSharedString}}</p>
     </div>
     <div style="text-align: center; margin-top: 7%">
       <button class="btn btn-success btn-lg col-xs-6" style="width:100%; font-size: 5vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">{{trial ? '3 Day Trial & Subscribe' : 'Subscribe'}}</button>
@@ -95,7 +94,7 @@
   </form>
   <div style="text-align: center; width: 100%" *ngIf="version">
     <p style="margin:0 0 0">{{detailString}}</p>
-    <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}}</p>
+    <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}} {{detailSharedString}}</p>
   </div>
   <p style="font-size: x-small; text-align: center" *ngIf="version && paypal_plan_id"> <i class="fa fa-lock" style="margin-left: 1%" aria-hidden="true"> Secure payment</i></p>
 </div>
