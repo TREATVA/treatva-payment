@@ -34,6 +34,7 @@ export class AppComponent implements OnInit{
 
   detailString: string | undefined;
   detailSharedString = '';
+  sharedMealTitle = '';
   total: number | undefined;
   period: string | undefined;
   gifts: string | undefined;
@@ -98,9 +99,20 @@ export class AppComponent implements OnInit{
           ? '_' + this.price.replace('.', '') : '');
         if(this.plan.includes('MEAL_1')) {
           this.detailSharedString = '(8,960 kibbles / 28 meals)'
+          if(this.frequency == 'week') {
+            this.sharedMealTitle = (320 * 7) + ' kibbles a week (7 meals)'
+          } else {
+            this.sharedMealTitle = (320 * 7 * 4) + ' kibbles a month (28 meals)'
+          }
         } else {
           this.detailSharedString = '(26,880 kibbles / 84 meals)'
+          if(this.frequency == 'week') {
+            this.sharedMealTitle = (320 * 7 * 3 ) + ' kibbles a week (21 meals)'
+          } else {
+            this.sharedMealTitle = (320 * 7 * 4 * 3) + ' kibbles a month (84 meals)'
+          }
         }
+
       } else {
         planId = this.plan
           + (this.trial ? '_TRIAL' : '') + '_'
@@ -282,6 +294,12 @@ export class AppComponent implements OnInit{
             }
           }
           this.total = +this.total.toFixed(2)
+          if(this.detailString?.includes('X 1 month')) {
+            this.detailString = this.detailString?.replace('X 1 month', '')
+          }
+          if(this.detailSharedString?.includes('X 1 month')) {
+            this.detailSharedString = this.detailSharedString?.replace('X 1 month', '')
+          }
         } else if(this.price != null){
           let planId = '';
           if(this.plan == 'FREE_DELIVERY') {
@@ -475,7 +493,14 @@ export class AppComponent implements OnInit{
                   }
                 }
                 this.total = +this.total.toFixed(2)
-              }});
+              }
+              if(this.detailString?.includes('X 1 month')) {
+                this.detailString = this.detailString?.replace('X 1 month', '')
+              }
+              if(this.detailSharedString?.includes('X 1 month')) {
+                this.detailSharedString = this.detailSharedString?.replace('X 1 month', '')
+              }
+            });
         }
         if(this.nowDate){
           this.analytics.logEvent('loading_time', { "uid":this.uid, "duration": new Date().getTime() - this.nowDate.getTime()})

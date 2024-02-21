@@ -11,7 +11,7 @@
 <div style="width: 100%; text-align: center; font-weight: bold;font-size: x-large;">
   <span *ngIf="plan != null && !plan.includes('SHARED')">{{plan == 'FREE_DELIVERY' ? 'Unlimited deliveries' : (plan.includes('MEAL_1') ? (version && trial ? '3 Day Trial: 1 Meal / Day':'1 Meal / Day'): '3 Meals / Day')}}</span>
   <p *ngIf="plan != null && plan.includes('SHARED')" style="margin: 0 0 0">
-    {{plan != null && plan.includes('MEAL_1') ? (320 * 7) + ' kibbles a week (7 meals)' : (320*3*7)+' kibbles a week (21 meals)'}}
+    {{sharedMealTitle}}
   </p>
   <p *ngIf="plan != null && plan.includes('SHARED')" style="font-size:small; margin: 0 0 0">
     {{plan != null && plan.includes('MEAL_1') ? '320 kibbles a day shared between your dogs' : '960 kibbles a day shared between your dogs'}}
