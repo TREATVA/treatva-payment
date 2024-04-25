@@ -82,6 +82,7 @@
     var queryString = window.location.search
     var urlParams = new URLSearchParams(queryString);
     var btoken = urlParams.get('token');
+    var rolls = urlParams.get('rolls_count');
     var plan_id = urlParams.get('plan_id');
     var paypal_plan_id = urlParams.get('paypal_plan_id');
     var uid = urlParams.get('uid');
@@ -128,6 +129,7 @@
           pdata.animalIds = animal_ids;
           pdata.newShop = newShop != null;
           pdata.price = price
+          pdata.rolls = rolls
           pdata.paypalSubId = data.subscriptionID;
           if(trial) pdata.trial = true;
           $('#success-paypal').click()
@@ -200,6 +202,7 @@
             pdata.animalIds = animal_ids;
             pdata.paypalSubId = data.subscriptionID;
             pdata.newShop = newShop != null;
+            pdata.rolls = rolls
             pdata.price = price
             $('#success-paypal').click()
             $.ajax({
@@ -407,6 +410,7 @@
               data.animalIds = animal_ids;
               data.newShop = newShop != null;
               data.price = price
+              data.rolls = rolls
               if(trial) data.trial = true;
 
               $.ajax({
