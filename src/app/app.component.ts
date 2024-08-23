@@ -163,13 +163,13 @@ export class AppComponent implements OnInit{
           }
           this.period = 'Weekly';
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week") + " X " + multiplyPart + ""
             this.total = this.price != null && this.price != '' ? +this.price : 1.49 ;
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
             this.total = (this.price != null && this.price != '' ? +this.price : 2.79) * animalCount;
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week") + " X " + multiplyPart
             this.total = (this.price != null && this.price != '' ? +this.price : 4.99) * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
           }
         } else if(monthId != null && monthId == this.plan_id){
@@ -193,13 +193,13 @@ export class AppComponent implements OnInit{
             if(this.frequency == 'month') totalMultiplier = 1
           }
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week") + " X " + multiplyPart + ""
             this.total = (this.price !== null && this.price !== '' ? +this.price : 1.49) * totalMultiplier;
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier * animalCount;
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week") + " X " + multiplyPart
             this.total = (this.price !== null && this.price !== '' ? +this.price  :  4.99) * totalMultiplier  * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
           }
         } else if(quartId != null && quartId == this.plan_id) {
@@ -223,30 +223,30 @@ export class AppComponent implements OnInit{
             if(this.frequency == 'month') totalMultiplier = 3
           }
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X " + multiplyPart + ""
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week")+" X " + multiplyPart + ""
             this.total = (this.price !== null && this.price !== '' ? +this.price  : 1.49) * totalMultiplier;
             this.gifts = (animalCount * 5) + ' meals';
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
             this.total =  ((this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ) * animalCount;
             this.gifts = (animalCount * 5) + ' meals';
           } else if(this.plan == 'MEAL_1_SHARED'){
-            this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
           } else if(this.plan == 'MEAL_3_SHARED'){
-            this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
           } else if(this.plan == 'MEAL_6_SHARED'){
-            this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
           } else if(this.plan == 'MEAL_9_SHARED'){
-            this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
           } else if(this.plan == 'MEAL_12_SHARED'){
-            this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week")+" X " + multiplyPart
             this.total =  ((this.price !== null && this.price !== '' ? +this.price : 4.99) * totalMultiplier) * animalCount;
             this.gifts = (animalCount * 10) + ' meals';
           }
@@ -271,15 +271,15 @@ export class AppComponent implements OnInit{
             if(this.frequency == 'month') totalMultiplier = 6
           }
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week") + " X " + multiplyPart + ""
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 1.49) * totalMultiplier;
             this.gifts = '10 meals';
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
             this.total =  ((this.price !== null && this.price !== '' ? +this.price :2.79) * totalMultiplier) * animalCount;
             this.gifts = (10* animalCount) + ' meals';
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week")+" X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 4.99) * totalMultiplier * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
             this.gifts = animalCount + ' Toy/s';
           }
@@ -304,15 +304,15 @@ export class AppComponent implements OnInit{
             multiplyPart = '52 weeks'
           }
           if(this.plan == 'FREE_DELIVERY'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X " + multiplyPart + ""
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week")+" X " + multiplyPart + ""
             this.total =  (this.price !== null && this.price !== '' ? +this.price : 1.49) * totalMultiplier;
             this.gifts = animalCount + ' Toy/s'
           } else if(this.plan == 'MEAL_1'){
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week")+" X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week")+" X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price  : 2.79) * totalMultiplier * animalCount;
             this.gifts = animalCount + ' Toy/s + ' + animalCount * 5 + ' meals ';
           } else {
-            this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart
+            this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week")+" X " + multiplyPart
             this.total =  (this.price !== null && this.price !== '' ? +this.price  : 4.99) * totalMultiplier * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
             this.gifts = animalCount + ' Toy/s + ' + animalCount * 10 + ' meals ';
           }
@@ -390,13 +390,13 @@ export class AppComponent implements OnInit{
                 }
                 this.period = 'Weekly';
                 if(this.plan == 'FREE_DELIVERY'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week") + " X " + multiplyPart + ""
                   this.total = this.price != null && this.price != '' ? +this.price : 1.49 ;
                 } else if(this.plan == 'MEAL_1'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
                   this.total = (this.price != null && this.price != '' ? +this.price : 2.79) * animalCount;
                 } else {
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week") + " X " + multiplyPart
                   this.total = (this.price != null && this.price != '' ? +this.price : 4.99) * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
                 }
               } else if(monthId != null && monthId == this.plan_id){
@@ -420,30 +420,30 @@ export class AppComponent implements OnInit{
                   if(this.frequency == 'month') totalMultiplier = 1
                 }
                 if(this.plan == 'FREE_DELIVERY'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week") + " X " + multiplyPart + ""
                   this.total = (this.price !== null && this.price !== '' ? +this.price : 1.49) * totalMultiplier;
                 } else if(this.plan == 'MEAL_1'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier * animalCount;
                 } else if(this.plan == 'MEAL_1_SHARED'){
-                  this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
                   this.detailSharedString = '(8,960 kibbles / 28 meals)'
                 } else if(this.plan == 'MEAL_3_SHARED'){
-                  this.detailString = (this.customDetails ? "$" + this.price  : "$4.79") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price  : "4.79") + " USD X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 4.99) * totalMultiplier ;
                   this.detailSharedString = '(26,880 kibbles / 84 meals)'
                 } else if(this.plan == 'MEAL_6_SHARED'){
-                  this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
                 } else if(this.plan == 'MEAL_9_SHARED'){
-                  this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
                 } else if(this.plan == 'MEAL_12_SHARED'){
-                  this.detailString = (this.customDetails ? "$" + this.price  : "$2.79") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price  : "2.79") + " USD X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ;
                 } else {
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week") + " X " + multiplyPart
                   this.total = (this.price !== null && this.price !== '' ? +this.price  :  4.99) * totalMultiplier  * animalCount;
                 }
               } else if(quartId != null && quartId == this.plan_id) {
@@ -467,15 +467,15 @@ export class AppComponent implements OnInit{
                   if(this.frequency == 'month') totalMultiplier = 3
                 }
                 if(this.plan == 'FREE_DELIVERY'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X " + multiplyPart + ""
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week")+" X " + multiplyPart + ""
                   this.total = (this.price !== null && this.price !== '' ? +this.price  : 1.49) * totalMultiplier;
                   this.gifts = (animalCount * 5) + ' meals';
                 } else if(this.plan == 'MEAL_1'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
                   this.total =  ((this.price !== null && this.price !== '' ? +this.price : 2.79) * totalMultiplier ) * animalCount;
                   this.gifts = (animalCount * 5) + ' meals';
                 } else {
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week")+" X " + multiplyPart
                   this.total =  ((this.price !== null && this.price !== '' ? +this.price : 4.99) * totalMultiplier) * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
                   this.gifts = (animalCount * 10) + ' meals';
                 }
@@ -500,15 +500,15 @@ export class AppComponent implements OnInit{
                   if(this.frequency == 'month') totalMultiplier = 6
                 }
                 if(this.plan == 'FREE_DELIVERY'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week") + " X " + multiplyPart + ""
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week") + " X " + multiplyPart + ""
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 1.49) * totalMultiplier;
                   this.gifts = '10 meals';
                 } else if(this.plan == 'MEAL_1'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week") + " X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week") + " X " + multiplyPart
                   this.total =  ((this.price !== null && this.price !== '' ? +this.price :2.79) * totalMultiplier) * animalCount;
                   this.gifts = (10* animalCount) + ' meals';
                 } else {
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week")+" X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 4.99) * totalMultiplier * animalCount;
                   this.gifts = animalCount + ' Toy/s';
                 }
@@ -533,15 +533,15 @@ export class AppComponent implements OnInit{
                   multiplyPart = '52 weeks'
                 }
                 if(this.plan == 'FREE_DELIVERY'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$1.49 per week")+" X " + multiplyPart + ""
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "1.49 USD per week")+" X " + multiplyPart + ""
                   this.total =  (this.price !== null && this.price !== '' ? +this.price : 1.49) * totalMultiplier;
                   this.gifts = animalCount + ' Toy/s'
                 } else if(this.plan == 'MEAL_1'){
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$2.79 per week")+" X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "2.79 USD per week")+" X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price  : 2.79) * totalMultiplier * animalCount;
                   this.gifts = animalCount + ' Toy/s + ' + animalCount * 5 + ' meals ';
                 } else {
-                  this.detailString = (this.customDetails ? "$" + this.price + " per " + this.frequency : "$4.99 per week")+" X " + multiplyPart
+                  this.detailString = (this.customDetails ?  this.price + " USD per " + this.frequency : "4.99 USD per week")+" X " + multiplyPart
                   this.total =  (this.price !== null && this.price !== '' ? +this.price  : 4.99) * totalMultiplier * ((this.plan != null && this.plan.includes('SHARED')) ? 1 : animalCount);
                   this.gifts = animalCount + ' Toy/s + ' + animalCount * 10 + ' meals ';
                 }
