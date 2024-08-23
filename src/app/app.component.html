@@ -76,7 +76,7 @@
     </div>
     <div style="text-align: center; width: 100%; margin-top: 5%">
       <p style="margin:0 0 0">{{detailString}}</p>
-      <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}} {{detailSharedString}}</p>
+      <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> {{total}} USD {{detailSharedString}}</p>
     </div>
     <div style="text-align: center; margin-top: 7%">
       <button class="btn btn-success btn-lg col-xs-6" style="width:100%; font-size: 5vw !important;background-color: deeppink !important; text-align: center !important; border: none !important;" type="button" id="submit-button"  onclick="do_when_clicking_submit_button()">{{trial ? '3 Day Trial & Subscribe' : 'Subscribe'}}</button>
@@ -94,7 +94,7 @@
   </form>
   <div style="text-align: center; width: 100%" *ngIf="version">
     <p style="margin:0 0 0">{{detailString}}</p>
-    <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> ${{total}} {{detailSharedString}}</p>
+    <p style="margin:0 0 0"><span style="font-weight: bold">Total:</span> {{total}} USD {{detailSharedString}}</p>
   </div>
   <p style="font-size: x-small; text-align: center" *ngIf="version && paypal_plan_id"> <i class="fa fa-lock" style="margin-left: 1%" aria-hidden="true"> Secure payment</i></p>
 </div>
